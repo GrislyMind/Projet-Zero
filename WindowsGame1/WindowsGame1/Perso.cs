@@ -72,8 +72,6 @@ namespace WindowsGame1
         {
             _keyboardState = Keyboard.GetState();
             _mouseState = Mouse.GetState();
-           // HandleInput(_keyboardState, _mouseState);
-
 
 
             if (caseDirection == Vector2.Zero)
@@ -85,83 +83,70 @@ namespace WindowsGame1
 
                 if (_direction.X < 1 && _direction.X > -1 && _direction.Y < 1 && _direction.Y > -1)
                     _speed = 0;
+
                 else
+                {
                     _speed = 0.1F;
 
-                if (_direction.X > 1)
-                    _direction.X = 1;
+                    if (_direction.X != 0 && _direction.Y != 0)
+                    {
+                        if (_direction.X > 0 && _direction.Y > 0)
+                        {
+                            _direction.X = 1;
+                            _direction.Y = 0.5F;
+                        }
 
-                else if (_direction.X < -1)
-                    _direction.X = -1;
+                        else if (_direction.X > 0 && _direction.Y < 0)
+                        {
+                            _direction.X = 1;
+                            _direction.Y = -0.5F;
+                        }
 
-                if (_direction.Y > 1)
-                    _direction.Y = 1;
+                        else if (_direction.X < 0 && _direction.Y > 0)
+                        {
+                            _direction.X = -1;
+                            _direction.Y = 0.5F;
+                        }
 
-                else if (_direction.Y < -1)
-                    _direction.Y = -1;
-            }
-               
-            /*
-            if (_speed > 0.4)
-                _speed = 0.4F;*/
+                        else
+                        {
+                            _direction.X = -1;
+                            _direction.Y = -0.5F;
+                        }
+                    }
 
-            if (caseDirection.X - _position.X > 1 || caseDirection.X - _position.X < -1)
-                _position.X += _direction.X * _speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    else
+                    {
+                        if (_direction.X > 1)
+                        {
+                            _direction.X = 1;
+                            _direction.Y = 0;
+                        }
 
-            /*else if (caseDirection.Y - _position.Y > 1 || caseDirection.Y - _position.Y < -1)
-                _position.Y -= 20;*/
+                        else if (_direction.X < -1)
+                        {
+                            _direction.X = -1;
+                            _direction.Y = 0;
+                        }
 
-            else
-                _position.Y += _direction.Y * _speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                        else if (_direction.Y > 1)
+                        {
+                            _direction.X = 0;
+                            _direction.Y = 1;
+                        }
 
+                        else
+                        {
+                            _direction.X = 0;
+                            _direction.Y = -1;
+                        }
 
-            if (_position.X < 0)
-                _position.X = 0;
+                    }
+                }
 
-           /* else if (_position.X > 800 - 128) // -taille de l'image
-                _position.X = 800 - 128;
-
-            if (_position.Y > 800 - 128)
-                _position.Y = 800 - 128;  // -taille de l'image
-
-            else if (_position.Y < 0)
-                _position.Y = 0;*/
-
-            /* if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();*/
-
-        }
-
-        public virtual void HandleInput(KeyboardState keyboardState, MouseState mouseState)
-        {
-            if (_keyboardState.IsKeyDown(Keys.Up))
-            {
-                _direction.Y = -1;
-                _speed += 0.1F;
-            }
-
-            else if (_keyboardState.IsKeyDown(Keys.Down))
-            {
-                _direction.Y = 1;
-                _speed += 0.1F;
-            }
-
-            if (_keyboardState.IsKeyDown(Keys.Right))
-            {
-                _direction.X = 1;
-                _speed += 0.1F;
             }
 
-            else if (_keyboardState.IsKeyDown(Keys.Left))
-            {
-                _direction.X = -1;
-                _speed += 0.1F;
-            }
-
-            if (_keyboardState.IsKeyUp(Keys.Up) && _keyboardState.IsKeyUp(Keys.Down) && _keyboardState.IsKeyUp(Keys.Right) && _keyboardState.IsKeyUp(Keys.Left))
-            {
-                _direction = Vector2.Zero;
-            }
+            _position += _direction * _speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
         }
 

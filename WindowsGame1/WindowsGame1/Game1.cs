@@ -84,7 +84,7 @@ namespace WindowsGame1
 
         public char fichTexture(int posLongueur, int posLargeur)
         {
-            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\alex\Desktop\projet zero\posTexture.txt");
+            string[] lines = System.IO.File.ReadAllLines("posTexture.txt");
             string text = lines[posLargeur];
 
             return text[posLongueur*2];
