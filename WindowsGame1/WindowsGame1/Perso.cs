@@ -21,7 +21,6 @@ namespace WindowsGame1
         private float _speed;
         private Vector2 caseDirection;
 
-
         public Texture2D Texture
         {
             get { return _texture; }
@@ -71,7 +70,7 @@ namespace WindowsGame1
         public virtual void Update(GameTime gameTime)
         {
             _keyboardState = Keyboard.GetState();
-            _mouseState = Mouse.GetState();
+            _mouseState = Mouse.GetState();            
 
 
             if (caseDirection == Vector2.Zero)
@@ -143,9 +142,9 @@ namespace WindowsGame1
 
                     }
                 }
-
+                
             }
-
+               
             _position += _direction * _speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
         }

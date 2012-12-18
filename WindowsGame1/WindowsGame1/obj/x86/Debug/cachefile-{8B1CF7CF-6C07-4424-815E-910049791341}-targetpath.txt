@@ -11,3 +11,4 @@ Content\textureIso3_mini.xnb
 Content\Potale.xnb
 Content\menuPause.xnb
 Content\perso3.xnb
+Content\posTexture.txt

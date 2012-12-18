@@ -15,20 +15,25 @@ namespace WindowsGame1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        private const int longueur = 30;
-        private const int largeur = 30;
+        private const int longueur = 50;
+        private const int largeur = 50;
         int lengthx = 132;
         int lengthy = 66;
         int posDepartX;
         int posDepartY;
-        int nbCaseAffiche;
+        int nbCaseCharge;
         Tile[,] map = new Tile[longueur, largeur];
         private SpriteFont _font;
         private Perso _perso;
         private MenuPause _menuPause;
         private MouseState _mouseState;
         private Vector2 caseUsed;
-
+        private int caseLeft;
+        int nbCaseAffiche;
+        int caseX;
+        int caseY;
+        int oldCaseX;
+        int oldCaseY;
       
         public Game1()
         {
@@ -46,27 +51,32 @@ namespace WindowsGame1
 
             caseUsed = new Vector2(-1, -1);
             Vector2 pos = new Vector2();
-            nbCaseAffiche = 30; // graphics.PreferredBackBufferHeight / lengthx;
-
+            nbCaseCharge = longueur; // graphics.PreferredBackBufferHeight / lengthx;
+            caseLeft = 0;
+            nbCaseAffiche = 30;
+            caseX = 0;
+            caseY = 0;
+            oldCaseX = -1;
+            oldCaseY = -1;
            /* if (nbCaseAffiche > 10)
                 nbCaseAffiche = 10;*/
 
             posDepartX = (graphics.PreferredBackBufferWidth - graphics.PreferredBackBufferHeight) / 2;
             posDepartY = graphics.PreferredBackBufferHeight / 2;
 
-            for (int i = 0; i < longueur; i++) //On parcourt les lignes du tableau
+            for (int i = 0; i < nbCaseCharge; i++) //On parcourt les lignes du tableau
             {
-                for (int j = 0; j < largeur; j++)
+                for (int j = 0; j < nbCaseCharge; j++)
                 {
-                    if (i % 2 != 0 || i == 1)
+                    if (i % 2 != 0)
                     {
-                        pos.X = ((j * lengthx + lengthx / 2) + (((i - 1) * lengthx) / 2)) - j * lengthx / 2 + posDepartX;
-                        pos.Y = (((i * lengthy) / 2)) - j * lengthy / 2 + posDepartY;
+                        pos.X = (j * lengthx + lengthx / 2) + (((i - 1) * lengthx) / 2) - j * lengthx / 2 + posDepartX ;
+                        pos.Y = (((i * lengthy) / 2)) - j * lengthy / 2 + posDepartY ;
                     }
                     else
                     {
-                        pos.X = (j * lengthx + ((i * lengthx) / 2)) - j * lengthx / 2 + posDepartX;
-                        pos.Y = (((i * lengthy) / 2)) - j * lengthy / 2 + posDepartY;
+                        pos.X = (j * lengthx + ((i * lengthx) / 2)) - j * lengthx / 2 + posDepartX ;
+                        pos.Y = (((i * lengthy) / 2)) - j * lengthy / 2 + posDepartY ;
                     }
                     map[i, j] = new Tile();
                     map[i, j].Initialize(pos, lengthx);
@@ -93,15 +103,14 @@ namespace WindowsGame1
 
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _perso.LoadContent(Content, "perso3");
             _menuPause.LoadContent(Content, "menuPause");
 
-            for (int l = 0; l < longueur; l++)
+            for (int l = 0; l < nbCaseCharge; l++)
             {
-                for (int h = 0; h < largeur; h++)
+                for (int h = 0; h < nbCaseCharge; h++)
                 {
                     map[l, h].LoadContent(Content);
                 }
@@ -128,7 +137,7 @@ namespace WindowsGame1
                 _perso.Update(gameTime);
 
             _menuPause.Update(gameTime);
-
+           // scrolling();
             HandleInput();
                         
             base.Update(gameTime);
@@ -137,62 +146,114 @@ namespace WindowsGame1
 
         public virtual void HandleInput()
         {
-            double distanceToCase = 0;
-            int caseX = 0;
-            int caseY = 0;
+           
             Vector2 mousePos;
 
             _mouseState = Mouse.GetState();
             mousePos.X = _mouseState.X;
             mousePos.Y = _mouseState.Y;
 
-            //distanceToCase = map[0, 0].SetCenter.Length; (//_mouseState.X  + _mouseState.Y * 2;
+            caseX = (int)(mousePos.X / lengthx -0.5 - (mousePos.Y / lengthy * -1 + 6)); // -0.5 et +6 pour ajuster, a verifier avec d'autres resolutions, images ...
+            caseY = (int)(mousePos.Y / lengthy * -1 + 10 + 0.5 + mousePos.X / lengthx - 1 - graphics.PreferredBackBufferWidth / lengthx / 2); // +10 +0.5 et -1 pour ajuster, a verifier avec d'autres resolutions, images ...
 
-            distanceToCase = distanceVect(mousePos, Vector2.Zero);
+            if (oldCaseX < nbCaseCharge && oldCaseY < nbCaseCharge && oldCaseX >= 0 && oldCaseY >= 0)
+                map[oldCaseX, oldCaseY].SetcaseCheck = false;
 
-
-            for (int l = 0; l < longueur; l++)
-            {
-                for (int h = 0; h < largeur; h++)
-                {
-                    if (distanceToCase > distanceVect(mousePos, map[l, h].SetCenter))
-                    {
-                        distanceToCase = distanceVect(mousePos, map[l, h].SetCenter);
-                        caseX = l;
-                        caseY = h;
-                    }
-                    map[l, h].SetcaseCheck = false;
-                }
-            }
-
-            
-            if (caseX < longueur && caseY < largeur)
+            if (caseX < nbCaseCharge && caseY < nbCaseCharge && caseX >= 0 && caseY >= 0 && caseX == oldCaseX && caseY == oldCaseY)
                 map[caseX, caseY].SetcaseCheck = true;
 
-            if (caseX < longueur && caseY < largeur && _mouseState.LeftButton == ButtonState.Pressed)
+            if (caseX < nbCaseCharge && caseY < nbCaseCharge && _mouseState.LeftButton == ButtonState.Pressed && caseX >= 0 && caseY >= 0)
             {
                 _perso.SetCaseDirection = map[caseX, caseY].SetPosition;
             }
+            oldCaseX = caseX;
+            oldCaseY = caseY;
+            
         }
 
         public double distanceVect(Vector2 vect1, Vector2 vect2)
         {
-             return (System.Math.Pow(vect1.X - vect2.X, 2) + System.Math.Pow(vect1.Y - vect2.Y, 2));
+            return (System.Math.Pow(vect1.X - vect2.X, 2) + System.Math.Pow(vect1.Y - vect2.Y, 2));
         }
+
+        // Version de Scrolling inefficace, je garde ici si jamais on a encore besion d'une ou deux fonctions
+        /*public void scrolling()
+        {
+            KeyboardState _keyboardState;
+            _keyboardState = Keyboard.GetState();
+            _mouseState = Mouse.GetState();
+            Vector2 replace = Vector2.Zero;
+
+             if (_keyboardState.IsKeyDown(Keys.Right))
+            //if (nbCaseAffiche < 50 && _mouseState.X >= graphics.PreferredBackBufferWidth + 300)
+            {
+                
+
+                if (nbCaseAffiche++ > 40)
+                    nbCaseAffiche = 40;
+
+                replace = new Vector2(-lengthx, 0);
+                    
+                    for (int l = caseLeft; l < nbCaseAffiche; l++)
+                    {
+                        for (int h = caseLeft; h < nbCaseAffiche; h++)
+                        {
+                            map[l, h].SetCenter += replace;
+                            map[l, h].SetPosition += replace;
+                            _perso.Position += replace;
+
+                        }
+                    }
+                    //System.Threading.Thread.Sleep(150);
+                    //caseLeft++;
+                   // nbCaseAffiche++;
+
+                }
+
+             else if (_keyboardState.IsKeyDown(Keys.Left))
+                 //if (nbCaseAffiche > 29 && _mouseState.X <= graphics.PreferredBackBufferWidth - 300)
+            {
+                if (nbCaseAffiche < 10)
+                    nbCaseAffiche = 10;
+                
+                        replace = new Vector2(lengthx, 0);
+                        nbCaseAffiche--;
+                    
+                    
+                    for (int l = caseLeft; l < nbCaseAffiche; l++)
+                    {
+                        for (int h = caseLeft; h < nbCaseAffiche; h++)
+                        {
+                            map[l, h].SetCenter += replace;
+                            map[l, h].SetPosition += replace;
+                            _perso.Position += replace;
+
+                        }
+                    }
+                   // System.Threading.Thread.Sleep(150);
+                    //caseLeft++;
+                   // nbCaseAffiche++;
+
+                }
+            
+        }*/
+
+        
 
         protected override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            for (int l = 0; l < nbCaseAffiche; l++)
+            for (int l = caseLeft; l < nbCaseAffiche; l++)
             {
-                for (int h = 0; h < nbCaseAffiche; h++)
+                for (int h = caseLeft; h < nbCaseAffiche; h++)
                 {
                     map[l, h].Draw(spriteBatch, gameTime);
+                    spriteBatch.DrawString(_font, Convert.ToString(caseX) + "," + Convert.ToString(caseY), Vector2.Zero, Color.White); // Convert.ToString(map[l, h].SetCenter.X) + "," + Convert.ToString(map[l, h].SetCenter.Y)
                 }
             }
-            //spriteBatch.DrawString(_font, Convert.ToString(distanceToCase), new Vector2(10, 20), Color.White);
+            
             _perso.Draw(spriteBatch, gameTime);
             _menuPause.Draw(spriteBatch, gameTime);
             spriteBatch.End();

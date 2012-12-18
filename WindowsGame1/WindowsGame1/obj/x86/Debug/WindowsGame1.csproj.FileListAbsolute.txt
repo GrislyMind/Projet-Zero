@@ -17,3 +17,4 @@ C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\Wi
 C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Potale.xnb
 C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\menuPause.xnb
 C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\perso3.xnb
+C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\posTexture.txt

@@ -20,6 +20,7 @@ namespace WindowsGame1
         char nbTexture;
         private bool caseCheck;
         private bool traversable;
+        float distToZero;
 
        /* public Tile(Texture2D tile, Vector2 position)
         {
@@ -47,6 +48,7 @@ namespace WindowsGame1
             center.Y = pos.Y + lengthX / 4;
             caseCheck = false;
             traversable = true;
+            distToZero = center.X * center.Y;
         }
 
         public Vector2 SetPosition
