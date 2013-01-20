@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\texture1.xnb</Output>
-      <Time>2012-12-18T15:22:32+01:00</Time>
+      <Output>c:\users\alex\documents\visual studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\texture1.xnb</Output>
+      <Time>2012-12-11T22:04:53.4504767+01:00</Time>
     </Item>
     <Item>
       <Source>texture2.jpg</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\texture2.xnb</Output>
-      <Time>2012-12-18T15:22:32+01:00</Time>
+      <Output>c:\users\alex\documents\visual studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\texture2.xnb</Output>
+      <Time>2012-12-11T22:04:58.246751+01:00</Time>
     </Item>
     <Item>
       <Source>texture0.bmp</Source>
@@ -25,152 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\texture0.xnb</Output>
-      <Time>2012-12-18T15:22:32+01:00</Time>
-    </Item>
-    <Item>
-      <Source>color_back.png</Source>
-      <Name>color_back</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\color_back.xnb</Output>
-      <Time>2012-12-18T15:22:32+01:00</Time>
-    </Item>
-    <Item>
-      <Source>textureIso0.png</Source>
-      <Name>textureIso0</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\textureIso0.xnb</Output>
-      <Time>2012-12-18T15:22:32+01:00</Time>
-    </Item>
-    <Item>
-      <Source>textureIso0_mini.png</Source>
-      <Name>textureIso0_mini</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\textureIso0_mini.xnb</Output>
-      <Time>2012-12-18T15:22:32+01:00</Time>
-    </Item>
-    <Item>
-      <Source>textureIso1_mini.png</Source>
-      <Name>textureIso1_mini</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\textureIso1_mini.xnb</Output>
-      <Time>2012-12-18T15:22:32+01:00</Time>
-    </Item>
-    <Item>
-      <Source>textureIso2_mini.png</Source>
-      <Name>textureIso2_mini</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\textureIso2_mini.xnb</Output>
-      <Time>2012-12-18T15:22:32+01:00</Time>
-    </Item>
-    <Item>
-      <Source>textureIso3_mini.png</Source>
-      <Name>textureIso3_mini</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\textureIso3_mini.xnb</Output>
-      <Time>2012-12-18T15:22:32+01:00</Time>
-    </Item>
-    <Item>
-      <Source>menuPause.jpg</Source>
-      <Name>menuPause</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\menuPause.xnb</Output>
-      <Time>2012-12-18T15:22:32+01:00</Time>
-    </Item>
-    <Item>
-      <Source>perso3_2.png</Source>
-      <Name>perso3_2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\perso3_2.xnb</Output>
-      <Time>2012-12-18T15:22:32+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Potale.png</Source>
-      <Name>Potale</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Potale.xnb</Output>
-      <Time>2012-12-18T15:22:32+01:00</Time>
-    </Item>
-    <Item>
-      <Source>090528095302_10.jpg</Source>
-      <Name>fondMenu</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\fondMenu.xnb</Output>
-      <Time>2013-01-12T18:13:00+01:00</Time>
-    </Item>
-    <Item>
-      <Source>BoutonJouer.bmp</Source>
-      <Name>BoutonJouer</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\BoutonJouer.xnb</Output>
-      <Time>2013-01-12T18:18:04+01:00</Time>
-    </Item>
-    <Item>
-      <Source>BoutonOptions.bmp</Source>
-      <Name>BoutonOptions</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\BoutonOptions.xnb</Output>
-      <Time>2013-01-12T18:18:12+01:00</Time>
-    </Item>
-    <Item>
-      <Source>BoutonQuitter.bmp</Source>
-      <Name>BoutonQuitter</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\BoutonQuitter.xnb</Output>
-      <Time>2013-01-12T18:18:18+01:00</Time>
-    </Item>
-    <Item>
-      <Source>perso3.png</Source>
-      <Name>perso3</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\perso3.xnb</Output>
-      <Time>2013-01-12T19:38:46+01:00</Time>
-    </Item>
-    <Item>
-      <Source>perso_up.png</Source>
-      <Name>perso_up</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\perso_up.xnb</Output>
-      <Time>2013-01-14T11:08:26+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Potale2.png</Source>
-      <Name>Potale2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Potale2.xnb</Output>
-      <Time>2013-01-14T12:10:58+01:00</Time>
+      <Output>c:\users\alex\documents\visual studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\texture0.xnb</Output>
+      <Time>2012-12-11T22:21:38.3289525+01:00</Time>
     </Item>
     <Item>
       <Source>MaPolice.spritefont</Source>
@@ -178,8 +34,89 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\MaPolice.xnb</Output>
-      <Time>2012-12-18T15:22:32+01:00</Time>
+      <Output>c:\users\alex\documents\visual studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\MaPolice.xnb</Output>
+      <Time>2012-12-11T23:36:00.9992026+01:00</Time>
+    </Item>
+    <Item>
+      <Source>color_back.png</Source>
+      <Name>color_back</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\color_back.xnb</Output>
+      <Time>2012-12-12T18:57:28.5971627+01:00</Time>
+    </Item>
+    <Item>
+      <Source>textureIso0.png</Source>
+      <Name>textureIso0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\textureIso0.xnb</Output>
+      <Time>2012-12-12T21:31:09.2495539+01:00</Time>
+    </Item>
+    <Item>
+      <Source>textureIso0_mini.png</Source>
+      <Name>textureIso0_mini</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\textureIso0_mini.xnb</Output>
+      <Time>2012-12-12T21:35:07.6481895+01:00</Time>
+    </Item>
+    <Item>
+      <Source>textureIso1_mini.png</Source>
+      <Name>textureIso1_mini</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\textureIso1_mini.xnb</Output>
+      <Time>2012-12-12T21:44:47.8613758+01:00</Time>
+    </Item>
+    <Item>
+      <Source>textureIso2_mini.png</Source>
+      <Name>textureIso2_mini</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\textureIso2_mini.xnb</Output>
+      <Time>2012-12-12T21:44:54.6607647+01:00</Time>
+    </Item>
+    <Item>
+      <Source>textureIso3_mini.png</Source>
+      <Name>textureIso3_mini</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\textureIso3_mini.xnb</Output>
+      <Time>2012-12-12T21:45:00.3730914+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Potale.png</Source>
+      <Name>Potale</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Potale.xnb</Output>
+      <Time>2012-12-13T19:47:30.7598043+01:00</Time>
+    </Item>
+    <Item>
+      <Source>menuPause.jpg</Source>
+      <Name>menuPause</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\menuPause.xnb</Output>
+      <Time>2012-12-12T22:45:24.1993624+01:00</Time>
+    </Item>
+    <Item>
+      <Source>perso3.png</Source>
+      <Name>perso3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\perso3.xnb</Output>
+      <Time>2012-12-13T19:41:36.5265483+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -187,39 +124,39 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>G:\Projet-Zero-master\WindowsGame1\WindowsGame1Content\</RootDirectory>
-      <LoggerRootDirectory>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\</LoggerRootDirectory>
-      <IntermediateDirectory>G:\Projet-Zero-master\WindowsGame1\WindowsGame1Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>G:\Projet-Zero-master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\alex\Documents\Visual Studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
-        <Value>2010-08-23T12:41:18+01:00</Value>
+        <Value>2010-08-23T13:41:18+02:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
-        <Value>2010-08-23T12:41:18+01:00</Value>
+        <Value>2010-08-23T13:41:18+02:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
-        <Value>2010-08-23T12:41:18+01:00</Value>
+        <Value>2010-08-23T13:41:18+02:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
-        <Value>2010-08-23T12:41:18+01:00</Value>
+        <Value>2010-08-23T13:41:18+02:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
-        <Value>2010-08-23T12:41:18+01:00</Value>
+        <Value>2010-08-23T13:41:18+02:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
-        <Value>2010-08-23T12:41:18+01:00</Value>
+        <Value>2010-08-23T13:41:18+02:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2013-01-20T13:24:06.3054006+01:00</Value>
+        <Value>2012-11-25T12:48:11.6200967+01:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

@@ -14,7 +14,6 @@ namespace WindowsGame1
     class Tile
     {
         private Texture2D texture;
-        private Texture2D texturePoint;
         private Texture2D texture2;
         private Vector2 position;
         private Vector2 center;
@@ -43,7 +42,6 @@ namespace WindowsGame1
         {
             texture = null;
             texture2 = null;
-            texturePoint = null;
             nbTexture = '0';
             position = pos;
             center.X = pos.X + lengthX / 2;
@@ -82,25 +80,23 @@ namespace WindowsGame1
 
         public virtual void LoadContent(ContentManager content)
         {
-            texturePoint = content.Load<Texture2D>("textureIso0_mini");
-
             if (nbTexture == '1')
-                texture = content.Load<Texture2D>("textureIso0_mini");
+                texture = content.Load<Texture2D>("textureIso1_mini");
 
             else if (nbTexture == '2')
                 texture = content.Load<Texture2D>("textureIso2_mini");
-             
+
             else if (nbTexture == '3')
                 texture = content.Load<Texture2D>("textureIso3_mini");
-    
+
             else if (nbTexture == 'p')
             {
                 texture = content.Load<Texture2D>("textureIso0_mini");
-                texture2 = content.Load<Texture2D>("Potale2");
+                texture2 = content.Load<Texture2D>("Potale");
             }
 
             else// if (nbTexture < 51)
-                texture = content.Load<Texture2D>("textureIso2_mini");
+                texture = content.Load<Texture2D>("textureIso0_mini");
         }
 
         public Texture2D Texture
@@ -116,21 +112,19 @@ namespace WindowsGame1
 
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            Vector2 posPotale;
-            posPotale.X = position.X + 10;
-            posPotale.Y = position.Y - 20;
-
             if (caseCheck && traversable)
-                spriteBatch.Draw(texturePoint, position, Color.Blue);
+                spriteBatch.Draw(texture, position, Color.Blue);
 
             else if (caseCheck && !traversable)
-                spriteBatch.Draw(texturePoint, position, Color.Red);
+                spriteBatch.Draw(texture, position, Color.Red);
 
             else
                 spriteBatch.Draw(texture, position, Color.White);
 
             if (texture2 != null)
-                spriteBatch.Draw(texture2, posPotale, Color.White);
+                spriteBatch.Draw(texture2, position, Color.White);
+  
         }
+
     }
 }
