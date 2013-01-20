@@ -30,7 +30,7 @@ namespace WindowsGame1
         public Vector2 SetCaseDirection
         {
             get { return caseDirection; }
-            set { caseDirection.X = value.X; caseDirection.Y = value.Y - 20; } // -20 pour un meilleur positionnement en Y
+            set { caseDirection.X = value.X + 20; caseDirection.Y = value.Y - 65; } // -20 pour un meilleur positionnement en Y
         }
 
         public Vector2 Position
@@ -55,8 +55,8 @@ namespace WindowsGame1
 
         public virtual void Initialize(Vector2 pos)
         {
-            _position.X = pos.X;
-            _position.Y = pos.Y - 20; // -20 pour un meilleur positionnement en Y
+            _position.X = pos.X + 20;
+            _position.Y = pos.Y - 65; // -20 pour un meilleur positionnement en Y
             _direction = Vector2.Zero;
             caseDirection = Vector2.Zero;
             _speed = 0.1F;
@@ -87,7 +87,7 @@ namespace WindowsGame1
                 {
                     _speed = 0.1F;
 
-                    if (_direction.X != 0 && _direction.Y != 0)
+                    if (_direction.X > 1 && _direction.Y > 1 || _direction.X < -1 && _direction.Y > 1 || _direction.X > 1 && _direction.Y < -1 || _direction.X < -1 && _direction.Y < -1)
                     {
                         if (_direction.X > 0 && _direction.Y > 0)
                         {

@@ -15,8 +15,8 @@ namespace WindowsGame1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        private const int longueur = 50;
-        private const int largeur = 50;
+        private const int longueur = 8;
+        private const int largeur = 8;
         int lengthx = 132;
         int lengthy = 66;
         int posDepartX;
@@ -27,6 +27,7 @@ namespace WindowsGame1
         private Perso _perso;
         private MenuPause _menuPause;
         private MouseState _mouseState;
+        private KeyboardState _keyboardState;
         private Vector2 caseUsed;
         private int caseLeft;
         int nbCaseAffiche;
@@ -34,6 +35,8 @@ namespace WindowsGame1
         int caseY;
         int oldCaseX;
         int oldCaseY;
+        bool pause;
+        
       
         public Game1()
         {
@@ -44,20 +47,23 @@ namespace WindowsGame1
 
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferHeight = graphics.PreferredBackBufferWidth = 800;
-            this.Window.AllowUserResizing = true;
+            //graphics.PreferredBackBufferHeight = graphics.PreferredBackBufferWidth = 800;
+           // this.Window.AllowUserResizing = true;
             this.IsMouseVisible = true;
+            graphics.IsFullScreen = true;
             graphics.ApplyChanges();
 
             caseUsed = new Vector2(-1, -1);
             Vector2 pos = new Vector2();
             nbCaseCharge = longueur; // graphics.PreferredBackBufferHeight / lengthx;
             caseLeft = 0;
-            nbCaseAffiche = 30;
+            nbCaseAffiche = 8;
             caseX = 0;
             caseY = 0;
             oldCaseX = -1;
             oldCaseY = -1;
+            pause = true;
+            
            /* if (nbCaseAffiche > 10)
                 nbCaseAffiche = 10;*/
 
@@ -105,8 +111,8 @@ namespace WindowsGame1
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _perso.LoadContent(Content, "perso3");
-            _menuPause.LoadContent(Content, "menuPause");
+            _perso.LoadContent(Content, "perso_up");
+            _menuPause.LoadContent(Content, "fondMenu", "BoutonJouer", "BoutonOptions", "BoutonQuitter");
 
             for (int l = 0; l < nbCaseCharge; l++)
             {
@@ -133,16 +139,49 @@ namespace WindowsGame1
            /* if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();*/
 
-            if (!_menuPause.Pause())
-                _perso.Update(gameTime);
+            IsPause();
 
-            _menuPause.Update(gameTime);
-           // scrolling();
-            HandleInput();
-                        
+            if (!pause)
+            {
+                _perso.Update(gameTime);
+                HandleInput();
+            }
+
+            else
+                _menuPause.Update(gameTime);
+
+            //scrolling();
+            
+
+            if (_menuPause.isQuitte)
+                this.Exit();
+
             base.Update(gameTime);
         }
-        
+
+        public virtual void IsPause()
+        {
+            _keyboardState = Keyboard.GetState();
+
+            if (!_menuPause.Pause)
+                pause = false;
+
+            if (_keyboardState.IsKeyDown(Keys.Escape))
+            {
+                if (!pause)
+                {
+                    pause = true;
+                    _menuPause.Pause = true;
+                    System.Threading.Thread.Sleep(150);
+                }
+                else
+                {
+                    pause = false;
+                    _menuPause.Pause = false;
+                    System.Threading.Thread.Sleep(150);
+                }
+            }
+        }
 
         public virtual void HandleInput()
         {
@@ -153,8 +192,8 @@ namespace WindowsGame1
             mousePos.X = _mouseState.X;
             mousePos.Y = _mouseState.Y;
 
-            caseX = (int)(mousePos.X / lengthx -0.5 - (mousePos.Y / lengthy * -1 + 6)); // -0.5 et +6 pour ajuster, a verifier avec d'autres resolutions, images ...
-            caseY = (int)(mousePos.Y / lengthy * -1 + 10 + 0.5 + mousePos.X / lengthx - 1 - graphics.PreferredBackBufferWidth / lengthx / 2); // +10 +0.5 et -1 pour ajuster, a verifier avec d'autres resolutions, images ...
+            caseX = (int)(mousePos.X / lengthx + 1 - (mousePos.Y / lengthy * -1 + 6 +0.5));//- (mousePos.Y / lengthy * -1 + 2)); 
+            caseY = (int)(mousePos.Y / lengthy * -1 + 7.5  + mousePos.X / lengthx - 1.5 - graphics.PreferredBackBufferWidth / lengthx / 2); // + mousePos.X / lengthx - 1 - graphics.PreferredBackBufferWidth / lengthx / 2); 
 
             if (oldCaseX < nbCaseCharge && oldCaseY < nbCaseCharge && oldCaseX >= 0 && oldCaseY >= 0)
                 map[oldCaseX, oldCaseY].SetcaseCheck = false;
@@ -177,7 +216,7 @@ namespace WindowsGame1
         }
 
         // Version de Scrolling inefficace, je garde ici si jamais on a encore besion d'une ou deux fonctions
-        /*public void scrolling()
+        public void scrolling()
         {
             KeyboardState _keyboardState;
             _keyboardState = Keyboard.GetState();
@@ -236,14 +275,14 @@ namespace WindowsGame1
 
                 }
             
-        }*/
+        }
 
         
 
         protected override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             for (int l = caseLeft; l < nbCaseAffiche; l++)
             {
