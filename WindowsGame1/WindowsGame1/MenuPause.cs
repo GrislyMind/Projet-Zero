@@ -16,8 +16,12 @@ namespace WindowsGame1
         private Vector2 _position;
         private KeyboardState _keyboardState;
         private MouseState _mouseState;
-        private bool pause = false;
+        private bool pause;
         private Texture2D _texture;
+        private Texture2D jouer;
+        private Texture2D options;
+        private Texture2D quitter;
+        private bool jouerIn, OptionIn, QuitterIn, optionsMenu, inGame, quitte;
 
 
         public Texture2D Texture
@@ -31,20 +35,33 @@ namespace WindowsGame1
             get { return _position; }
             set { _position = value; }
         }
-        
-        public bool Pause()
+
+        public bool isQuitte
         {
-            return pause;
+            get { return quitte; }
+            set { quitte = value; }
+        }
+        
+       public bool Pause
+        {
+             get { return pause; }
+            set { pause = value; }
         }
 
         public virtual void Initialize()
         {
-            _position = new Vector2(800 / 2 - 259 / 2, 400 / 2 - 194 / 2); // a ameliorer pour sadapter a la taille de la fenetre / ecran
+            _position = new Vector2(200,150); //new Vector2(800 / 2 - 259 / 2, 400 / 2 - 194 / 2); // a ameliorer pour sadapter a la taille de la fenetre / ecran
+            jouerIn = OptionIn = QuitterIn = optionsMenu = inGame = quitte = false;
+            pause = true;
+
         }
 
-        public virtual void LoadContent(ContentManager content, string assetName)
+        public virtual void LoadContent(ContentManager content, string assetFond, string assetJouer, string assetOptions, string assetQuitter)
         {
-            _texture = content.Load<Texture2D>(assetName);
+            _texture = content.Load<Texture2D>(assetFond);
+            jouer = content.Load<Texture2D>(assetJouer);
+            options = content.Load<Texture2D>(assetOptions);
+            quitter = content.Load<Texture2D>(assetQuitter);
         }
 
         public virtual void Update(GameTime gameTime)
@@ -57,29 +74,62 @@ namespace WindowsGame1
                
         public virtual void HandleInput(KeyboardState keyboardState, MouseState mouseState)
         {
-            if (_keyboardState.IsKeyDown(Keys.Escape))
+            
+
+            jouerIn = false;
+            OptionIn = false;
+            QuitterIn = false;
+
+            if (_mouseState.X > _position.X && _mouseState.X < _position.X + 300 && _mouseState.Y > _position.Y && _mouseState.Y < _position.Y + 100)
             {
-                if (!pause)
+                jouerIn = true;
+                if (_mouseState.LeftButton == ButtonState.Pressed)
                 {
-                    pause = true;
                     System.Threading.Thread.Sleep(150);
-                }
-                else
-                {
                     pause = false;
-                    System.Threading.Thread.Sleep(150);
                 }
             }
 
-            if (_mouseState.X > 250 && _mouseState.X < 550 && _mouseState.LeftButton == ButtonState.Pressed)
-                pause = false;
+            else if (_mouseState.X > _position.X && _mouseState.X < _position.X + 300 && _mouseState.Y > _position.Y + 150 && _mouseState.Y < _position.Y + 250)
+            {
+                OptionIn = true;
+                if (_mouseState.LeftButton == ButtonState.Pressed)
+                    optionsMenu = true;
+            }
+
+            else if (_mouseState.X > _position.X && _mouseState.X < _position.X + 300 && _mouseState.Y > _position.Y + 300 && _mouseState.Y < _position.Y + 400)
+            {
+                QuitterIn = true;
+                if (_mouseState.LeftButton == ButtonState.Pressed)
+                    quitte = true;
+            }
+
         }
 
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
+            Vector2 _position2 = new Vector2(_position.X, _position.Y + 150);
+            Vector2 _position3 = new Vector2(_position.X, _position.Y + 300);
+
             if (pause)
             {
-                spriteBatch.Draw(_texture, _position, Color.White);
+                spriteBatch.Draw(_texture, Vector2.Zero, Color.White);
+
+                if (jouerIn)
+                    spriteBatch.Draw(jouer, _position, Color.Blue);
+                else
+                    spriteBatch.Draw(jouer, _position, Color.White);
+
+                if (OptionIn)
+                    spriteBatch.Draw(options, _position2, Color.Blue);
+                else
+                    spriteBatch.Draw(options, _position2, Color.White);
+
+                if (QuitterIn)
+                    spriteBatch.Draw(quitter, _position3, Color.Blue);
+                else
+                    spriteBatch.Draw(quitter, _position3, Color.White);
+
             }
         }
     }

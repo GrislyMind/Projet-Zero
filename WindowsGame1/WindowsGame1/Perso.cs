@@ -21,6 +21,10 @@ namespace WindowsGame1
         private float _speed;
         private Vector2 caseDirection;
 
+        //Ajout par Riked : pour le pathfinding (Dernière modif : le 06/02/2013)
+        private bool _isMoving = false;
+        //Fin d'ajout
+
         public Texture2D Texture
         {
             get { return _texture; }
@@ -30,7 +34,7 @@ namespace WindowsGame1
         public Vector2 SetCaseDirection
         {
             get { return caseDirection; }
-            set { caseDirection.X = value.X; caseDirection.Y = value.Y - 20; } // -20 pour un meilleur positionnement en Y
+            set { caseDirection.X = value.X + 20; caseDirection.Y = value.Y - 65; } // -20 pour un meilleur positionnement en Y
         }
 
         public Vector2 Position
@@ -51,12 +55,20 @@ namespace WindowsGame1
             set { _speed = value; }
         }
 
+        //Ajout par Riked : pour le pathfinding (Dernière modif : le 06/02/2013)
 
+        public virtual bool IsMoving
+        {
+            get { return _isMoving; }
+            set { _isMoving = value; }
+        }
+
+        //Fin d'ajout
 
         public virtual void Initialize(Vector2 pos)
         {
-            _position.X = pos.X;
-            _position.Y = pos.Y - 20; // -20 pour un meilleur positionnement en Y
+            _position.X = pos.X + 20;
+            _position.Y = pos.Y - 65; // -20 pour un meilleur positionnement en Y
             _direction = Vector2.Zero;
             caseDirection = Vector2.Zero;
             _speed = 0.1F;
@@ -70,7 +82,7 @@ namespace WindowsGame1
         public virtual void Update(GameTime gameTime)
         {
             _keyboardState = Keyboard.GetState();
-            _mouseState = Mouse.GetState();            
+            _mouseState = Mouse.GetState();
 
 
             if (caseDirection == Vector2.Zero)
@@ -80,11 +92,19 @@ namespace WindowsGame1
             {
                 _direction = caseDirection - _position;
 
-                if (_direction.X < 1 && _direction.X > -1 && _direction.Y < 1 && _direction.Y > -1)
-                    _speed = 0;
+                //Modifié par Riked : pour le pathfinding
 
+                if (_isMoving == false && _speed != 0 || _direction.X < 1 && _direction.X > -1 && _direction.Y < 1 && _direction.Y > -1)
+                {
+                    _speed = 0;
+                    _isMoving = false;
+                } //Fin de modification
                 else
                 {
+                    //Ajout par Riked : pour le pathfinding (Dernière modif : le 06/02/2013)
+                    _isMoving = true;
+                    //Fin d'ajout
+
                     _speed = 0.1F;
 
                     if (_direction.X != 0 && _direction.Y != 0)
@@ -142,9 +162,9 @@ namespace WindowsGame1
 
                     }
                 }
-                
+
             }
-               
+
             _position += _direction * _speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
         }
