@@ -98,7 +98,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Projet-Zero-Master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\perso3_2.xnb</Output>
-      <Time>2012-12-18T15:22:32+01:00</Time>
+      <Time>2013-02-06T23:44:39.5707538+01:00</Time>
     </Item>
     <Item>
       <Source>Potale.png</Source>
@@ -116,7 +116,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Projet-Zero-Master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\fondMenu.xnb</Output>
-      <Time>2013-01-12T18:13:00+01:00</Time>
+      <Time>2013-02-06T23:44:39.5127505+01:00</Time>
     </Item>
     <Item>
       <Source>BoutonJouer.bmp</Source>
@@ -125,7 +125,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Projet-Zero-Master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\BoutonJouer.xnb</Output>
-      <Time>2013-01-12T18:18:04+01:00</Time>
+      <Time>2013-02-06T23:44:39.5147506+01:00</Time>
     </Item>
     <Item>
       <Source>BoutonOptions.bmp</Source>
@@ -134,7 +134,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Projet-Zero-Master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\BoutonOptions.xnb</Output>
-      <Time>2013-01-12T18:18:12+01:00</Time>
+      <Time>2013-02-06T23:44:39.5177508+01:00</Time>
     </Item>
     <Item>
       <Source>BoutonQuitter.bmp</Source>
@@ -143,7 +143,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Projet-Zero-Master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\BoutonQuitter.xnb</Output>
-      <Time>2013-01-12T18:18:18+01:00</Time>
+      <Time>2013-02-06T23:44:39.5207509+01:00</Time>
     </Item>
     <Item>
       <Source>perso3.png</Source>
@@ -152,7 +152,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Projet-Zero-Master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\perso3.xnb</Output>
-      <Time>2013-01-12T19:38:46+01:00</Time>
+      <Time>2013-02-06T23:44:39.5437523+01:00</Time>
     </Item>
     <Item>
       <Source>perso_up.png</Source>
@@ -161,7 +161,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Projet-Zero-Master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\perso_up.xnb</Output>
-      <Time>2013-01-14T11:08:25.1634209+01:00</Time>
+      <Time>2013-02-06T23:44:39.573754+01:00</Time>
     </Item>
     <Item>
       <Source>Potale2.png</Source>
@@ -170,7 +170,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Projet-Zero-Master\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Potale2.xnb</Output>
-      <Time>2013-01-14T12:10:56.8699115+01:00</Time>
+      <Time>2013-02-06T23:44:39.5227511+01:00</Time>
     </Item>
     <Item>
       <Source>MaPolice.spritefont</Source>

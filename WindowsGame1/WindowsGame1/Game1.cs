@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Threading;
 
 namespace WindowsGame1
 {
@@ -259,7 +260,9 @@ namespace WindowsGame1
                 //Modifié par Riked : pour le pathfinding (Dernière modif : le 06/02/2013)
 
                 int idcase = caseX * longueur + caseY;
+                
                 itineraire.Clear();
+
                 _perso.IsMoving = false; //Force le personnage à s'arrêter
 
                 List<PathStruct> iti = new List<PathStruct>();
@@ -343,25 +346,59 @@ namespace WindowsGame1
 
             while (goodid < 0)
             {
+                List<double> f = new List<double>();
                 List<PathStruct> fils = new List<PathStruct>();
 
                 int ycase = currentid % longueur;
                 int xcase = currentid / longueur;
 
-                if (noeuds[currentid].id - 1 >= 0 && noeuds[currentid].id - 1 < noeuds.Count && (noeuds[currentid].id - 1) % longueur == ycase - 1) fils.Add(noeuds[noeuds[currentid].id - 1]); //Y-1
-                if (noeuds[currentid].id + 1 >= 0 && noeuds[currentid].id + 1 < noeuds.Count && (noeuds[currentid].id + 1) % longueur == ycase + 1) fils.Add(noeuds[noeuds[currentid].id + 1]); //Y+1
-                if (noeuds[currentid].id + longueur >= 0 && noeuds[currentid].id + longueur < noeuds.Count && (noeuds[currentid].id + longueur) / longueur == xcase + 1) fils.Add(noeuds[noeuds[currentid].id + longueur]); //X+1
-                if (noeuds[currentid].id - longueur >= 0 && noeuds[currentid].id - longueur < noeuds.Count && (noeuds[currentid].id - longueur) / longueur == xcase - 1) fils.Add(noeuds[noeuds[currentid].id - longueur]); //X-1
-                if (noeuds[currentid].id + longueur - 1 >= 0 && noeuds[currentid].id + longueur - 1 < noeuds.Count && (noeuds[currentid].id - 1 + longueur) % longueur == ycase - 1 && (noeuds[currentid].id + longueur - 1) / longueur == xcase + 1) fils.Add(noeuds[noeuds[currentid].id + longueur - 1]); //X+1 Y-1
-                if (noeuds[currentid].id + longueur + 1 >= 0 && noeuds[currentid].id + longueur + 1 < noeuds.Count && (noeuds[currentid].id + 1 + longueur) % longueur == ycase + 1 && (noeuds[currentid].id + longueur + 1) / longueur == xcase + 1) fils.Add(noeuds[noeuds[currentid].id + longueur + 1]); //X+1 Y+1
-                if (noeuds[currentid].id - longueur - 1 >= 0 && noeuds[currentid].id - longueur - 1 < noeuds.Count && (noeuds[currentid].id - 1 - longueur) % longueur == ycase - 1 && (noeuds[currentid].id - longueur - 1) / longueur == xcase - 1) fils.Add(noeuds[noeuds[currentid].id - longueur - 1]); //X-1 Y-1
-                if (noeuds[currentid].id - longueur + 1 >= 0 && noeuds[currentid].id - longueur + 1 < noeuds.Count && (noeuds[currentid].id + 1 - longueur) % longueur == ycase + 1 && (noeuds[currentid].id - longueur + 1) / longueur == xcase - 1) fils.Add(noeuds[noeuds[currentid].id - longueur + 1]); //X-1 Y+1
+                if (noeuds[currentid].id - 1 >= 0 && noeuds[currentid].id - 1 < noeuds.Count && (noeuds[currentid].id - 1) % longueur == ycase - 1)
+                {
+                    f.Add(0);
+                    fils.Add(noeuds[noeuds[currentid].id - 1]); //Y-1
+                }
+                if (noeuds[currentid].id + 1 >= 0 && noeuds[currentid].id + 1 < noeuds.Count && (noeuds[currentid].id + 1) % longueur == ycase + 1)
+                {
+                    f.Add(0);
+                    fils.Add(noeuds[noeuds[currentid].id + 1]); //Y+1
+                }
+                if (noeuds[currentid].id + longueur >= 0 && noeuds[currentid].id + longueur < noeuds.Count && (noeuds[currentid].id + longueur) / longueur == xcase + 1)
+                {
+                    f.Add(0);
+                    fils.Add(noeuds[noeuds[currentid].id + longueur]); //X+1
+                }
+                if (noeuds[currentid].id - longueur >= 0 && noeuds[currentid].id - longueur < noeuds.Count && (noeuds[currentid].id - longueur) / longueur == xcase - 1)
+                {
+                    f.Add(0);
+                    fils.Add(noeuds[noeuds[currentid].id - longueur]); //X-1
+                }
+                if (noeuds[currentid].id + longueur - 1 >= 0 && noeuds[currentid].id + longueur - 1 < noeuds.Count && (noeuds[currentid].id - 1 + longueur) % longueur == ycase - 1 && (noeuds[currentid].id + longueur - 1) / longueur == xcase + 1)
+                {
+                    f.Add(0.5);
+                    fils.Add(noeuds[noeuds[currentid].id + longueur - 1]); //X+1 Y-1
+                }
+                if (noeuds[currentid].id + longueur + 1 >= 0 && noeuds[currentid].id + longueur + 1 < noeuds.Count && (noeuds[currentid].id + 1 + longueur) % longueur == ycase + 1 && (noeuds[currentid].id + longueur + 1) / longueur == xcase + 1)
+                {
+                    f.Add(0.5);
+                    fils.Add(noeuds[noeuds[currentid].id + longueur + 1]); //X+1 Y+1
+                }
+                if (noeuds[currentid].id - longueur - 1 >= 0 && noeuds[currentid].id - longueur - 1 < noeuds.Count && (noeuds[currentid].id - 1 - longueur) % longueur == ycase - 1 && (noeuds[currentid].id - longueur - 1) / longueur == xcase - 1)
+                {
+                    f.Add(0.5);
+                    fils.Add(noeuds[noeuds[currentid].id - longueur - 1]); //X-1 Y-1
+                }
+                if (noeuds[currentid].id - longueur + 1 >= 0 && noeuds[currentid].id - longueur + 1 < noeuds.Count && (noeuds[currentid].id + 1 - longueur) % longueur == ycase + 1 && (noeuds[currentid].id - longueur + 1) / longueur == xcase - 1)
+                {
+                    f.Add(0.5);
+                    fils.Add(noeuds[noeuds[currentid].id - longueur + 1]); //X-1 Y+1
+                }
 
                 for (int i = 0; i < fils.Count; ++i)
                 {
                     if (fils[i].dejaparcouru || fils[i].traversable == false || fils[i].parcouru != 0)
                     {
                         fils.RemoveAt(i);
+                        f.RemoveAt(i);
                         --i;
                     }
                 }
@@ -371,7 +408,7 @@ namespace WindowsGame1
                     PathStruct n1 = noeuds[currentid];
                     PathStruct n2 = noeuds[fils[i].id];
 
-                    noeuds[fils[i].id].parcouru = n1.parcouru + distance(n1, n2);
+                    noeuds[fils[i].id].parcouru = n1.parcouru + 1 + f[i];// + distance(n1, n2);
                     noeuds[fils[i].id].idfather = currentid;
 
                     if (fils[i].id == fin) goodid = fils[i].id;

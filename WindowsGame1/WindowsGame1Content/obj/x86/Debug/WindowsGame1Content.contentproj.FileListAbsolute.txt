@@ -2,3 +2,4 @@ c:\users\alex\documents\visual studio 2010\Projects\WindowsGame1\WindowsGame1\Wi
 C:\Users\Jo\Documents\Progra\Projet\Projet-Zero-master\WindowsGame1\WindowsGame1Content\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Jo\Desktop\Projet-Zero-master\WindowsGame1\WindowsGame1Content\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Steven\Desktop\Projet-Zero\WindowsGame1\WindowsGame1Content\obj\x86\Debug\WindowsGame1Content.contentprojResolveAssemblyReference.cache
+C:\Projet-Zero-Master\WindowsGame1\WindowsGame1Content\obj\x86\Debug\WindowsGame1Content.contentprojResolveAssemblyReference.cache
