@@ -30,8 +30,8 @@ namespace WindowsGame1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        private const int longueur = 8;
-        private const int largeur = 8;
+        private const int longueur = 150;
+        private const int largeur = 150;
         int lengthx = 132;
         int lengthy = 66;
         int posDepartX;
@@ -51,12 +51,13 @@ namespace WindowsGame1
         int oldCaseX;
         int oldCaseY;
         bool pause;
+        bool escDown = false;
 
-        // Ajout par Riked : Pour le pathfinding (Dernière modif : le 06/02/2013)
+        // Ajout par Riked : Pour le pathfinding (Dernière modif : le 24/02/2013)
         List<PathStruct> carte = new List<PathStruct>(longueur * largeur);
         List<PathStruct> itineraire = new List<PathStruct>();
-        int perso_case = 0;
-        int last_case_id = 0;
+        int perso_case = 15 + 15*longueur;
+        int last_case_id = 15 + 15*longueur;
         //Fin d'ajout
         
       
@@ -79,7 +80,7 @@ namespace WindowsGame1
             Vector2 pos = new Vector2();
             nbCaseCharge = longueur; // graphics.PreferredBackBufferHeight / lengthx;
             caseLeft = 0;
-            nbCaseAffiche = 8;
+            nbCaseAffiche = 25;
             caseX = 0;
             caseY = 0;
             oldCaseX = -1;
@@ -89,7 +90,7 @@ namespace WindowsGame1
            /* if (nbCaseAffiche > 10)
                 nbCaseAffiche = 10;*/
 
-            posDepartX = (graphics.PreferredBackBufferWidth - graphics.PreferredBackBufferHeight) / 2;
+            posDepartX = -7 * lengthx;
             posDepartY = graphics.PreferredBackBufferHeight / 2;
 
             for (int i = 0; i < nbCaseCharge; i++) //On parcourt les lignes du tableau
@@ -112,7 +113,7 @@ namespace WindowsGame1
                 }
             }
 
-            // Ajout par Riked : Pour le pathfinding (Dernière modif : le 06/02/2013)
+            // Ajout par Riked : Pour le pathfinding (Dernière modif : le 24/02/2013)
             for (int i = 0; i < nbCaseCharge; ++i)
             {
                 for (int j = 0; j < nbCaseCharge; ++j)
@@ -126,11 +127,15 @@ namespace WindowsGame1
                 }
             }
 
-            perso_case = 0;
+            perso_case = 15 + 15*longueur;
             // Fin d'ajout
 
             _perso = new Perso();
-            _perso.Initialize(map[0, 0].SetPosition);
+
+            //Modifié par Riked : Correction de la position du personnage (dernière modif : le 24/02/2013)
+            _perso.Initialize(map[15, 15].SetPosition); //ancienne valeur : [7,7]
+            //Fin de modif
+
             _menuPause = new MenuPause();
             _menuPause.Initialize();
 
@@ -189,7 +194,7 @@ namespace WindowsGame1
             else
                 _menuPause.Update(gameTime);
 
-            //scrolling();
+            scrolling();
             
 
             if (_menuPause.isQuitte)
@@ -202,8 +207,8 @@ namespace WindowsGame1
                 if (_perso.IsMoving == false) //Si le personnage ne bouge pas, cela veut dire qu'il a déjà effectué l'ordre précédent
                 {
                     _perso.SetCaseDirection = new Vector2((float)itineraire[0].x, (float)itineraire[0].y);
-                    perso_case = last_case_id;
-                    last_case_id = itineraire[0].id;
+                    perso_case = itineraire[0].id;//last_case_id;
+                    //last_case_id = itineraire[0].id;
                     itineraire.RemoveAt(0);
                 }
             }
@@ -221,6 +226,9 @@ namespace WindowsGame1
                 pause = false;
 
             if (_keyboardState.IsKeyDown(Keys.Escape))
+                escDown = true;
+
+            if (_keyboardState.IsKeyUp(Keys.Escape) && escDown)
             {
                 if (!pause)
                 {
@@ -234,6 +242,7 @@ namespace WindowsGame1
                     _menuPause.Pause = false;
                     System.Threading.Thread.Sleep(150);
                 }
+                escDown = false;
             }
         }
 
@@ -246,8 +255,8 @@ namespace WindowsGame1
             mousePos.X = _mouseState.X;
             mousePos.Y = _mouseState.Y;
 
-            caseX = (int)(mousePos.X / lengthx + 1 - (mousePos.Y / lengthy * -1 + 6 +0.5));//- (mousePos.Y / lengthy * -1 + 2)); 
-            caseY = (int)(mousePos.Y / lengthy * -1 + 7.5  + mousePos.X / lengthx - 1.5 - graphics.PreferredBackBufferWidth / lengthx / 2); // + mousePos.X / lengthx - 1 - graphics.PreferredBackBufferWidth / lengthx / 2); 
+            caseX = (int)(mousePos.X / lengthx + 9.5 - (mousePos.Y / lengthy * -1 + 6 + 0.5) + caseLeft);//- (mousePos.Y / lengthy * -1 + 2)); 
+            caseY = (int)(mousePos.Y / lengthy * -1 + 16 + mousePos.X / lengthx - 1.5 - graphics.PreferredBackBufferWidth / lengthx / 2 + caseTop); // + mousePos.X / lengthx - 1 - graphics.PreferredBackBufferWidth / lengthx / 2); 
 
             if (oldCaseX < nbCaseCharge && oldCaseY < nbCaseCharge && oldCaseX >= 0 && oldCaseY >= 0)
                 map[oldCaseX, oldCaseY].SetcaseCheck = false;
@@ -277,6 +286,160 @@ namespace WindowsGame1
             oldCaseX = caseX;
             oldCaseY = caseY;
             
+        }
+
+        int reducScroll = 0;
+        int caseTop = 0;
+        Vector2 replaceTotal = Vector2.Zero;
+
+        public void scrolling()
+        {
+            KeyboardState _keyboardState;
+            _keyboardState = Keyboard.GetState();
+            _mouseState = Mouse.GetState();
+            Vector2 replace = Vector2.Zero;
+
+
+            if (replaceTotal.X == -lengthx /*&& replaceTotal.Y == 0*/)
+            {
+                caseLeft++;
+                caseTop++;
+                replaceTotal.X = 0;
+            }
+
+            else if (replaceTotal.X == lengthx /*&& replaceTotal.Y == 0*/)
+            {
+                caseLeft--;
+                caseTop++;
+                replaceTotal.X = 0;
+            }
+
+            else if (/*replaceTotal.X == 0 && */replaceTotal.Y <= -lengthy)
+            {
+                caseLeft++;
+                caseTop--;
+                replaceTotal.Y = 0;
+            }
+
+            else if (/*replaceTotal.X == 0 &&*/ replaceTotal.Y >= lengthy)
+            {
+                caseLeft--;
+                caseTop++;
+                replaceTotal.Y = 0;
+            }
+
+            if (_keyboardState.IsKeyDown(Keys.Right) || _mouseState.X > graphics.PreferredBackBufferWidth && caseLeft < nbCaseCharge - nbCaseAffiche /*&& reducScroll == 0*/)
+            {
+
+                replace = new Vector2(-2, 0);
+                replaceTotal += replace;
+
+                for (int l = 0; l < nbCaseCharge; l++)
+                {
+                    for (int h = 0; h < nbCaseCharge; h++)
+                    {
+                        //Ajout par Riked : Pour le pathfinding (dernière modif : le 24/02/2013)
+                        int idcase = l + h * longueur;
+                        carte[idcase].x += replace.X;
+                        carte[idcase].y += replace.Y;
+                        //Fin d'ajout
+
+                        map[l, h].SetCenter += replace;
+                        map[l, h].SetPosition += replace;
+                    }
+                }
+
+                //Ajout par Riked : Pour le scrolling (dernière modif : le 24/02/2013)
+                _perso._added_position += replace;
+                //Fin d'ajout
+            }
+
+
+            else if (_keyboardState.IsKeyDown(Keys.Left) || _mouseState.X < 10 && caseLeft > 0 /*&& reducScroll == 0*/)
+            {
+
+                replace = new Vector2(2, 0);
+                replaceTotal += replace;
+
+                for (int l = 0; l < nbCaseCharge; l++)
+                {
+                    for (int h = 0; h < nbCaseCharge; h++)
+                    {
+                        //Ajout par Riked : Pour le pathfinding (dernière modif : le 24/02/2013)
+                        int idcase = l + h * longueur;
+                        carte[idcase].x += replace.X;
+                        carte[idcase].y += replace.Y;
+                        //Fin d'ajout
+
+                        map[l, h].SetCenter += replace;
+                        map[l, h].SetPosition += replace;
+                    }
+                }
+
+                //Ajout par Riked : Pour le scrolling (dernière modif : le 24/02/2013)
+                _perso._added_position += replace;
+                //Fin d'ajout
+
+            }
+
+
+            else if (_keyboardState.IsKeyDown(Keys.Up) || _mouseState.Y < 10 && caseLeft > 0 && caseTop < nbCaseCharge - nbCaseAffiche/* && reducScroll == 0*/)
+            {
+                replace = new Vector2(0, 2);
+                replaceTotal += replace;
+
+                for (int l = 0; l < nbCaseCharge; l++)
+                {
+                    for (int h = 0; h < nbCaseCharge; h++)
+                    {
+                        //Ajout par Riked : Pour le pathfinding (dernière modif : le 24/02/2013)
+                        int idcase = l + h * longueur;
+                        carte[idcase].x += replace.X;
+                        carte[idcase].y += replace.Y;
+                        //Fin d'ajout
+
+                        map[l, h].SetCenter += replace;
+                        map[l, h].SetPosition += replace;
+
+                    }
+                }
+
+                //Ajout par Riked : Pour le scrolling (dernière modif : le 24/02/2013)
+                _perso._added_position += replace;
+                //Fin d'ajout
+
+            }
+
+
+            else if (_keyboardState.IsKeyDown(Keys.Down) || _mouseState.Y > graphics.PreferredBackBufferHeight && caseLeft < nbCaseCharge - nbCaseAffiche && caseTop > 0/* && reducScroll == 0*/)
+            {
+                replace = new Vector2(0, -2);
+                replaceTotal += replace;
+
+                for (int l = 0; l < nbCaseCharge; l++)
+                {
+                    for (int h = 0; h < nbCaseCharge; h++)
+                    {
+                        //Ajout par Riked : Pour le pathfinding (dernière modif : le 24/02/2013)
+                        int idcase = l + h * longueur;
+                        carte[idcase].x += replace.X;
+                        carte[idcase].y += replace.Y;
+                        //Fin d'ajout
+
+                        map[l, h].SetCenter += replace;
+                        map[l, h].SetPosition += replace;
+                    }
+                }
+
+                //Ajout par Riked : Pour le scrolling (dernière modif : le 24/02/2013)
+                _perso._added_position += replace;
+                //Fin d'ajout
+
+            }
+
+            /*reducScroll++;
+            if (reducScroll > 15)
+                reducScroll = 0;*/
         }
 
         // Ajout par Riked : pour le pathfinding (Dernière modif : le 06/02/2013)
@@ -311,18 +474,6 @@ namespace WindowsGame1
             }
 
             return idminimum;
-        }
-
-        public static double distance(PathStruct noeud1, PathStruct noeud2)
-        {
-            return Math.Sqrt((noeud1.x - noeud2.x) * (noeud1.x - noeud2.x) + (noeud1.y - noeud2.y) * (noeud1.y - noeud2.y));
-        }
-
-        public static void Swap(ref List<PathStruct> liste, int id1, int id2)
-        {
-            PathStruct save = liste[id1];
-            liste[id1] = liste[id2];
-            liste[id2] = save;
         }
 
         public bool Dijkstra(List<PathStruct> noeuds, int debut, int fin, ref List<PathStruct> path)
@@ -427,8 +578,8 @@ namespace WindowsGame1
 
             //path.Clear();
 
-            PathStruct current_node = new PathStruct();
-            current_node = noeuds[goodid];
+            PathStruct current_node = noeuds[goodid]; //new PathStruct();
+       //     current_node = noeuds[goodid];
 
             List<PathStruct> inverse_path = new List<PathStruct>();
 
@@ -456,15 +607,22 @@ namespace WindowsGame1
             spriteBatch.Begin();
             GraphicsDevice.Clear(Color.Black);
 
-            for (int l = caseLeft; l < nbCaseAffiche; l++)
+            try
             {
-                for (int h = caseLeft; h < nbCaseAffiche; h++)
+                for (int l = caseLeft; l < nbCaseAffiche + caseLeft; l++)
                 {
-                    map[l, h].Draw(spriteBatch, gameTime);
-                    spriteBatch.DrawString(_font, Convert.ToString(caseX) + "," + Convert.ToString(caseY), Vector2.Zero, Color.White); // Convert.ToString(map[l, h].SetCenter.X) + "," + Convert.ToString(map[l, h].SetCenter.Y)
+                    for (int h = caseTop; h < nbCaseAffiche + caseTop; h++)
+                    {
+                        map[l, h].Draw(spriteBatch, gameTime);
+                        spriteBatch.DrawString(_font, Convert.ToString(caseX) + "," + Convert.ToString(caseY), Vector2.Zero, Color.White); // Convert.ToString(map[l, h].SetCenter.X) + "," + Convert.ToString(map[l, h].SetCenter.Y)
+                    }
                 }
             }
-            
+
+            catch
+            {
+                spriteBatch.DrawString(_font, "Error !", Vector2.Zero, Color.White);
+            }
             _perso.Draw(spriteBatch, gameTime);
             _menuPause.Draw(spriteBatch, gameTime);
             spriteBatch.End();

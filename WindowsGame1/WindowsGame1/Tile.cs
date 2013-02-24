@@ -101,6 +101,9 @@ namespace WindowsGame1
              
             else if (nbTexture == '3')
                 texture = content.Load<Texture2D>("textureIso3_mini");
+
+            else if (nbTexture == 'h')
+                texture = content.Load<Texture2D>("losange_noir2");
     
             else if (nbTexture == 'p')
             {

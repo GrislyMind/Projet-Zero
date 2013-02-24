@@ -3,3 +3,5 @@ C:\Users\Jo\Documents\Progra\Projet\Projet-Zero-master\WindowsGame1\WindowsGame1
 C:\Users\Jo\Desktop\Projet-Zero-master\WindowsGame1\WindowsGame1Content\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Steven\Desktop\Projet-Zero\WindowsGame1\WindowsGame1Content\obj\x86\Debug\WindowsGame1Content.contentprojResolveAssemblyReference.cache
 C:\Projet-Zero-Master\WindowsGame1\WindowsGame1Content\obj\x86\Debug\WindowsGame1Content.contentprojResolveAssemblyReference.cache
+C:\Users\Alexandre\Desktop\Projet-Zero-master(1)\Projet-Zero-master\WindowsGame1\WindowsGame1Content\obj\x86\Debug\WindowsGame1Content.contentprojResolveAssemblyReference.cache
+C:\Users\Steven\Desktop\Projet-Zero-master(1)\Projet-Zero-master\WindowsGame1\WindowsGame1Content\obj\x86\Debug\WindowsGame1Content.contentprojResolveAssemblyReference.cache

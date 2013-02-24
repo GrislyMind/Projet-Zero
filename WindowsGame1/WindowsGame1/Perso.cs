@@ -25,6 +25,10 @@ namespace WindowsGame1
         private bool _isMoving = false;
         //Fin d'ajout
 
+        //Ajout par Riked : pour le scrolling (Dernière modif : le 24/02/2013)
+        public Vector2 _added_position = Vector2.Zero;
+        //Fin d'ajout
+
         public Texture2D Texture
         {
             get { return _texture; }
@@ -34,7 +38,10 @@ namespace WindowsGame1
         public Vector2 SetCaseDirection
         {
             get { return caseDirection; }
-            set { caseDirection.X = value.X + 20; caseDirection.Y = value.Y - 65; } // -20 pour un meilleur positionnement en Y
+
+            //Modifié par Riked : Pour le scrolling (Dernière modif : le 24/02/2013)
+            set { caseDirection.X = value.X + 20 - _added_position.X; caseDirection.Y = value.Y - 65 - _added_position.Y; } // -20 pour un meilleur positionnement en Y
+            //Fin de modif
         }
 
         public Vector2 Position
@@ -92,12 +99,13 @@ namespace WindowsGame1
             {
                 _direction = caseDirection - _position;
 
-                //Modifié par Riked : pour le pathfinding
+                //Modifié par Riked : pour le pathfinding + pour le scrolling (Dernière modif : le 24/02/2013)
 
                 if (_isMoving == false && _speed != 0 || _direction.X < 1 && _direction.X > -1 && _direction.Y < 1 && _direction.Y > -1)
                 {
                     _speed = 0;
                     _isMoving = false;
+                    caseDirection = Vector2.Zero; //Ligne ajoutée : corrige un bug du système de déplacement
                 } //Fin de modification
                 else
                 {
@@ -165,13 +173,15 @@ namespace WindowsGame1
 
             }
 
-            _position += _direction * _speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (_direction != Vector2.Zero) _position += _direction * _speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
         }
 
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            spriteBatch.Draw(_texture, _position, Color.White);
+            //Modifié par Riked : Pour le scrolling (Dernière modif : le 24/02/2013)
+            spriteBatch.Draw(_texture, _position + _added_position, Color.White);
+            //Fin de modif
         }
     }
 }
